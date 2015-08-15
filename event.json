@@ -1,0 +1,8 @@
+{
+    "status":"success",
+    "events":[
+        {"title":"event1","startTime":"11:00"},
+        {"title":"event2","startTime":"13:00"},
+        {"title":"event3","startTime":"15:00"}
+    ]
+}

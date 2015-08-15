@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+#notice {
+    padding: 5px;
+    background-color: rgba(0,0,0,0.8);
+    font-size: 14px;
+    color: #fff;
+}
+</style>
+</head>
+<body>
+
+<div id="notice"></div>
+
+<script>
+(function(){
+var date = new Date();
+$.ajax({
+    url: "http://127.0.0.1:8080/event.json",
+    dataType: "json",
+    success: function(data) {
+        console.log(data.events[0].startTime);
+        console.log(date.getMinutes());
+        document.getElementById("notice").innerHTML = "10分後にイベントが始まります！";
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus);
+    }
+});
+})();
+</script>
+</body>
+</html>
