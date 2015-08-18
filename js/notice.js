@@ -3,7 +3,7 @@
 var MINUTES_TO_NEXT_FETCH = 1,
 
 /* 次のイベント通知を表示する時間(分) */
-MINUTES_TO_NEXT_EVENT = 5;
+MINUTES_DISPLAYING_NOTICE = 5;
 
 // データ取得
 fetchEventData();
@@ -41,12 +41,13 @@ function onGetEventData(data) {
 
     if (waitingMinutes === -1) {
         // 待ちイベントなし
+        document.getElementById("notice").innerHTML = "<p>本日の実験は終了しました。</p>";
         return;
-    } else if (waitingMinutes <= MINUTES_TO_NEXT_EVENT) {
-        // MINUTES_TO_NEXT_EVENT分以内に開始のイベントあり
+    } else if (waitingMinutes <= MINUTES_DISPLAYING_NOTICE) {
+        // MINUTES_DISPLAYING_NOTICE分以内に開始のイベントあり
         document.getElementById("notice").innerHTML = "<p>" + getNextEvent(data, now).title + "スタートまで、あと" + waitingMinutes + "分！</p>";
     } else {
-        // MINUTES_TO_NEXT_EVENT分以降に開催のイベントあり
+        // MINUTES_DISPLAYING_NOTICE分以降に開催のイベントあり
         setTimeout(function() {
             console.log("fetching data...");
             fetchEventData();
