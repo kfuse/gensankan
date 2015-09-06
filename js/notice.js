@@ -12,13 +12,14 @@ function fetchEventData() {
     $.ajax({
         url: "http://127.0.0.1:8080/event.json",
         dataType: "json",
-        success: onGetEventData,
+        success: onReceiveEventData,
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log(textStatus);
         }
     });
 }
-function onGetEventData(data) {
+
+function onReceiveEventData(data) {
     var date = new Date(),
         now = (date.getHours() * 60) + date.getMinutes(),
         nextEvent = getNextEvent(data, now),
@@ -54,6 +55,7 @@ function onGetEventData(data) {
         }, MINUTES_TO_NEXT_FETCH * 60 * 1000);
     }
 }
+
 function getWaitingMinutes(ev, now) {
     var i = 0,
         hour = 0,
@@ -66,6 +68,7 @@ function getWaitingMinutes(ev, now) {
     startMinutes = (hour * 60) + minute;
     return startMinutes - now;
 }
+
 function getOngoingEvent(data, now) {
     var i = 0,
         hour = 0,
@@ -91,6 +94,7 @@ function getOngoingEvent(data, now) {
     }
     return null;
 }
+
 function getNextEvent(data, now) {
     var i = 0,
         hour = 0,
@@ -109,4 +113,5 @@ function getNextEvent(data, now) {
     }
     return null;
 }
+
 })();
