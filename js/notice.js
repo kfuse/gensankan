@@ -9,8 +9,9 @@ MINUTES_DISPLAYING_NOTICE = 5;
 fetchEventData();
 
 function fetchEventData() {
+    var time = (new Date()).getTime();
     $.ajax({
-        url: "http://127.0.0.1:8080/event.json",
+        url: "http://127.0.0.1:8080/event.json?t=" + time,
         dataType: "json",
         success: onReceiveEventData,
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -31,7 +32,6 @@ function onReceiveEventData(data) {
     } else {
         waitingMinutes = -1;
     }
-    console.log("waitingMinutes: " + waitingMinutes);
     ongoingEvent = getOngoingEvent(data, now);
 
     if (ongoingEvent) {
@@ -50,7 +50,6 @@ function onReceiveEventData(data) {
     } else {
         // MINUTES_DISPLAYING_NOTICE分以降に開催のイベントあり
         setTimeout(function() {
-            console.log("fetching data...");
             fetchEventData();
         }, MINUTES_TO_NEXT_FETCH * 60 * 1000);
     }
