@@ -10,6 +10,6 @@
   "license": "ISC",
   "devDependencies": {
     "http-server": "^0.8.0",
-    "jquery": "^2.1.4"
+    "jquery": ">=3.4.0"
   }
 }
